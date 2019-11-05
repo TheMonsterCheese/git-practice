@@ -1,0 +1,34 @@
+#!/bin/bash
+#Author: Eric Xu
+#PID: 730095427
+#I pledge the UNC and COMP290 Honor Code.
+#echo "Todo"
+first=${1}
+if [ "$first" == "--help" ]
+then
+    #--help was called
+    echo "Usage: did-duke-win [test-url]"
+    exit 1
+fi
+
+#curl -s https://diddukewin.com | grep -q no
+#suppress the progress bar and look for no; -q returns 0 even if there is an error if the pattern is found
+if [ -z  "${first}" ] #if $first is empty
+then
+    curl -s https://diddukewin.com | grep -q -i yes
+    
+else
+#    echo "we got a url"
+#    echo "${first}"
+    curl -s "${first}" | grep -q -i yes 
+fi
+
+
+if [ "${?}" = 0 ] #means we found a yes
+then
+    echo "Yes."
+else
+    echo "No!"
+fi
+
+
